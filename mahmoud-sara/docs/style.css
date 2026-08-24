@@ -1,0 +1,877 @@
+/* =====================================================================
+   Mahmoud × Sara — style.css
+   Mobile-first. Pink Burgundy is the dominant identity throughout.
+   ===================================================================== */
+
+:root{
+  /* ---- Palette (do not change hex values casually — see README) ---- */
+  --burgundy:        #8F3F58;   /* primary pink burgundy */
+  --burgundy-deep:    #682C42;   /* deep burgundy */
+  --pink-soft:       #D9A0AF;   /* soft pink */
+  --blush:           #F3DDE3;   /* light blush */
+  --cream:           #FFF8F2;   /* warm cream */
+  --white-warm:      #FFFCF9;   /* warm white */
+  --text-dark:       #2E2528;   /* dark text */
+  --text-muted:      #786C70;   /* muted text */
+  --gold:            #C6A36A;   /* subtle gold accent */
+
+  --burgundy-glow: rgba(143, 63, 88, 0.28);
+
+  /* ---- Type ---- */
+  --font-display: 'Playfair Display', 'Noto Naskh Arabic', serif;
+  --font-body: 'DM Sans', 'Noto Naskh Arabic', sans-serif;
+  --font-arabic: 'Noto Naskh Arabic', 'DM Sans', serif;
+
+  /* ---- Layout ---- */
+  --max-width: 640px;
+  --section-pad-y: 5.5rem;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  --ease: cubic-bezier(.22,.9,.32,1);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img{ max-width: 100%; display: block; }
+
+button{
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.heart{ color: var(--burgundy); }
+
+/* ---------------------------------------------------------------------
+   Ambient floating particles (behind everything, very subtle)
+--------------------------------------------------------------------- */
+.ambient{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.ambient span{
+  position: absolute;
+  bottom: -40px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pink-soft);
+  opacity: .35;
+  animation: floatUp linear infinite;
+  box-shadow: 0 0 8px var(--burgundy-glow);
+}
+@keyframes floatUp{
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: .45; }
+  90%  { opacity: .25; }
+  100% { transform: translateY(-110vh) translateX(20px); opacity: 0; }
+}
+
+/* ---------------------------------------------------------------------
+   Buttons
+--------------------------------------------------------------------- */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  border: none;
+  border-radius: 999px;
+  padding: .95rem 1.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+  -webkit-tap-highlight-color: transparent;
+  min-height: 48px;
+}
+.btn:active{ transform: scale(.97); }
+
+.btn-primary{
+  background: linear-gradient(135deg, var(--burgundy), var(--burgundy-deep));
+  color: var(--white-warm);
+  box-shadow: 0 10px 28px -10px var(--burgundy-glow);
+}
+.btn-primary:hover{ box-shadow: 0 14px 32px -8px var(--burgundy-glow); }
+
+.btn-large{
+  padding: 1.1rem 2.4rem;
+  font-size: 1.05rem;
+}
+
+.btn-ghost{
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--pink-soft);
+  padding: .7rem 1.4rem;
+  font-weight: 500;
+  font-size: .92rem;
+}
+.btn-ghost:hover{ color: var(--burgundy); border-color: var(--burgundy); }
+
+.arrow{ display: inline-block; transition: transform .25s var(--ease); }
+.btn:hover .arrow{ transform: translateX(4px); }
+
+/* ---------------------------------------------------------------------
+   Shared type helpers
+--------------------------------------------------------------------- */
+.eyebrow{
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--burgundy);
+  margin: 0 0 .9rem;
+}
+.eyebrow-center{ text-align: center; }
+
+.section-title{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 6vw, 2.4rem);
+  color: var(--burgundy-deep);
+  text-align: center;
+  margin: 0 0 2.5rem;
+}
+
+/* ---------------------------------------------------------------------
+   Full-screen sections (opening)
+--------------------------------------------------------------------- */
+.screen{
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.opening{
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--blush) 0%, transparent 60%),
+    linear-gradient(180deg, var(--cream), var(--white-warm));
+  text-align: center;
+}
+.opening-inner{ max-width: 420px; }
+
+.opening-title{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(2.2rem, 9vw, 2.9rem);
+  color: var(--burgundy-deep);
+  margin: 0 0 .8rem;
+}
+
+.opening-sub{
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  margin: 0 0 2.2rem;
+}
+
+.opening-tiny{
+  margin-top: 1.4rem;
+  font-size: .82rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------
+   Reveal animations
+--------------------------------------------------------------------- */
+.reveal-up{
+  animation: revealUp .9s var(--ease) both;
+}
+@keyframes revealUp{
+  from{ opacity: 0; transform: translateY(18px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+.reveal-on-scroll{
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+.reveal-on-scroll.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------------
+   Main site sections
+--------------------------------------------------------------------- */
+.site{
+  position: relative;
+  z-index: 1;
+}
+
+.section{
+  padding: var(--section-pad-y) 1.5rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* HERO ---------------------------------------------------------------- */
+.hero{
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: none;
+  background:
+    radial-gradient(ellipse at 50% 20%, var(--blush) 0%, transparent 55%),
+    var(--cream);
+  position: relative;
+}
+.hero-inner{ max-width: 640px; }
+
+.hero-title{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 8vw, 4rem);
+  color: var(--burgundy);
+  margin: 0 0 1rem;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.hero-title .cross{
+  color: var(--gold);
+  font-weight: 400;
+  margin: 0 .1em;
+}
+.hero-sub{
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.scroll-hint{
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+.scroll-hint span{
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(var(--burgundy), transparent);
+  display: block;
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+@keyframes scrollPulse{
+  0%, 100%{ opacity: .3; }
+  50%{ opacity: 1; }
+}
+
+/* CHILDHOOD STORY ------------------------------------------------------ */
+.childhood{
+  max-width: none;
+  background: var(--white-warm);
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.childhood-step{
+  padding: 3.2rem 1.5rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.story-line{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 5.5vw, 1.7rem);
+  color: var(--burgundy-deep);
+  margin: 0 0 1.8rem;
+}
+.story-photo{
+  margin: 0 auto;
+  max-width: 280px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 50px -18px rgba(104,44,66,.35);
+  border: 6px solid var(--white-warm);
+  outline: 1px solid var(--blush);
+}
+.story-photo img{ width: 100%; height: auto; }
+
+.story-date{
+  display: inline-flex;
+  flex-direction: column;
+  gap: .35rem;
+  padding: 1.4rem 2rem;
+  border: 1px solid var(--pink-soft);
+  border-radius: var(--radius-md);
+  background: var(--blush);
+}
+.story-date-num{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--burgundy);
+  letter-spacing: .04em;
+}
+.story-date-label{
+  font-size: .88rem;
+  color: var(--text-muted);
+}
+
+/* "years later" reveal: two big photos side by side, with the story's
+   words held between them, then a large date underneath. */
+.together-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  max-width: 460px;
+  margin: 0 auto 1.8rem;
+}
+.together-photo{
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 5px solid var(--white-warm);
+  outline: 1px solid var(--blush);
+  box-shadow: 0 18px 40px -16px rgba(104,44,66,.4);
+  margin: 0;
+}
+.together-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.together-center{
+  flex: 1.1 1 0;
+  min-width: 0;
+  text-align: center;
+  padding: 0 .3rem;
+}
+.together-text{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(.85rem, 3.6vw, 1.05rem);
+  color: var(--burgundy-deep);
+  margin: 0 0 .6rem;
+  line-height: 1.35;
+}
+.together-text-sub{
+  font-size: clamp(.68rem, 2.6vw, .82rem);
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.together-date-block{
+  text-align: center;
+}
+.together-date-big{
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 8vw, 2.4rem);
+  color: var(--burgundy);
+  letter-spacing: .03em;
+  margin-bottom: .5rem;
+}
+.together-date-caption{
+  display: block;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+/* TIMELINE -------------------------------------------------------------- */
+.timeline-section{ background: var(--cream); }
+
+.timeline{
+  position: relative;
+  padding-left: 1.6rem;
+  border-left: 2px solid var(--pink-soft);
+}
+.timeline-item{
+  position: relative;
+  padding-bottom: 2.6rem;
+  padding-left: 1.4rem;
+}
+.timeline-item:last-child{ padding-bottom: 0; }
+.timeline-item::before{
+  content: '';
+  position: absolute;
+  left: -1.98rem;
+  top: .2rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  box-shadow: 0 0 0 5px var(--blush);
+}
+.timeline-date{
+  font-weight: 700;
+  color: var(--burgundy);
+  font-size: .85rem;
+  letter-spacing: .04em;
+  margin: 0 0 .3rem;
+}
+.timeline-title{
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0 0 .3rem;
+}
+.timeline-desc{
+  color: var(--text-muted);
+  font-size: .95rem;
+  margin: 0;
+}
+
+/* LETTER ------------------------------------------------------------ */
+.letter-section{ background: var(--white-warm); text-align: center; }
+
+.envelope-wrap{ display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+
+.envelope{
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 3 / 2;
+  position: relative;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.envelope-back{
+  position: absolute; inset: 0;
+  background: var(--blush);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--pink-soft);
+}
+.envelope-front{
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, var(--pink-soft), var(--blush));
+  border-radius: var(--radius-sm);
+  clip-path: polygon(0 30%, 50% 62%, 100% 30%, 100% 100%, 0 100%);
+  border: 1px solid var(--pink-soft);
+}
+.envelope-flap{
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 62%;
+  background: linear-gradient(160deg, var(--burgundy), var(--burgundy-deep));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transform-origin: top center;
+  transition: transform .7s var(--ease);
+  z-index: 2;
+}
+.envelope-seal{
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white-warm);
+  font-size: 1.1rem;
+  z-index: 3;
+  box-shadow: 0 4px 14px rgba(198,163,106,.5);
+  transition: opacity .4s ease;
+}
+.envelope.is-open .envelope-flap{
+  transform: rotateX(-160deg);
+}
+.envelope.is-open .envelope-seal{
+  opacity: 0;
+}
+
+.letter-paper{
+  margin-top: 2.4rem;
+  background: var(--cream);
+  border: 1px solid var(--blush);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem 1.6rem;
+  text-align: right;
+  box-shadow: 0 24px 60px -24px rgba(104,44,66,.3);
+  animation: revealUp .8s var(--ease) both;
+}
+.letter-heading{
+  font-family: var(--font-arabic);
+  text-align: center;
+  color: var(--burgundy);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 1.4rem;
+}
+.letter-body{
+  font-family: var(--font-arabic);
+  font-size: 1.05rem;
+  line-height: 2.1;
+  color: var(--text-dark);
+  white-space: pre-line;
+}
+
+/* REASONS ------------------------------------------------------------- */
+.reasons-section{ background: var(--cream); }
+
+.reasons-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.reason-card{
+  background: var(--white-warm);
+  border: 1px solid var(--blush);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+}
+.reason-mark{
+  color: var(--burgundy);
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.reason-text{ margin: 0; color: var(--text-dark); font-size: .98rem; }
+
+/* SMILE ---------------------------------------------------------------- */
+.smile-section{ text-align: center; background: var(--white-warm); }
+.smile-message{
+  margin-top: 1.8rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--burgundy-deep);
+  min-height: 2.4em;
+}
+
+/* MEMORIES --------------------------------------------------------------- */
+.memories-section{ background: var(--cream); }
+
+.memories-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+}
+.memory-card{
+  background: var(--white-warm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 18px 40px -22px rgba(104,44,66,.3);
+  border: 1px solid var(--blush);
+}
+.memory-photo{
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--blush);
+}
+.memory-photo img{
+  width: 100%; height: 100%; object-fit: cover;
+  cursor: zoom-in;
+  transition: transform .4s ease;
+}
+.memory-photo:hover img{ transform: scale(1.04); }
+.memory-info{ padding: 1.1rem 1.3rem 1.3rem; }
+.memory-date{
+  font-size: .74rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  font-weight: 700;
+  margin: 0 0 .3rem;
+}
+.memory-title{
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 .35rem;
+  color: var(--text-dark);
+}
+.memory-desc{ font-size: .9rem; color: var(--text-muted); margin: 0; }
+
+/* Lightbox */
+.lightbox{
+  position: fixed; inset: 0;
+  background: rgba(46,37,40,.92);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn .3s ease both;
+}
+@keyframes fadeIn{ from{ opacity: 0; } to{ opacity: 1; } }
+.lightbox img{
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.lightbox-caption{
+  color: var(--blush);
+  margin-top: 1rem;
+  font-size: .95rem;
+  text-align: center;
+}
+.lightbox-close{
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: rgba(255,255,255,.12);
+  border: none;
+  color: var(--white-warm);
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+}
+
+/* SONG PLAYER ------------------------------------------------------------ */
+.song-section{ text-align: center; background: var(--white-warm); }
+.song-artist{ color: var(--text-muted); margin: -1.8rem 0 2rem; font-size: .95rem; }
+
+.player{
+  background: var(--blush);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--pink-soft);
+}
+.player-disc{
+  width: 92px; height: 92px;
+  margin: 0 auto 1.6rem;
+  border-radius: 50%;
+  background: conic-gradient(var(--burgundy-deep), var(--burgundy), var(--burgundy-deep), var(--burgundy), var(--burgundy-deep));
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 24px -8px rgba(104,44,66,.5);
+}
+.player-disc.spinning{ animation: spinDisc 6s linear infinite; }
+@keyframes spinDisc{ from{ transform: rotate(0); } to{ transform: rotate(360deg); } }
+.disc-hole{
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--blush);
+  border: 3px solid var(--white-warm);
+}
+
+.player-controls{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.player-play{
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--burgundy), var(--burgundy-deep));
+  color: var(--white-warm);
+  display: flex; align-items: center; justify-content: center;
+}
+.player-track{ flex: 1; text-align: left; }
+.player-bar{
+  height: 8px;
+  background: var(--white-warm);
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--pink-soft);
+}
+.player-bar-fill{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--burgundy), var(--gold));
+  border-radius: 999px;
+  transition: width .15s linear;
+}
+.player-times{
+  display: flex;
+  justify-content: space-between;
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: .4rem;
+}
+.player-hint{
+  margin: 1.4rem 0 0;
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+.player-hint code{
+  background: var(--white-warm);
+  padding: .1rem .4rem;
+  border-radius: 4px;
+  font-size: .78rem;
+}
+
+/* COUNTER ------------------------------------------------------------- */
+.counter-section{ text-align: center; background: var(--cream); }
+.counter-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .9rem;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.counter-cell{
+  background: linear-gradient(160deg, var(--burgundy), var(--burgundy-deep));
+  border-radius: var(--radius-md);
+  padding: 1.4rem .5rem;
+  color: var(--white-warm);
+  box-shadow: 0 14px 30px -14px var(--burgundy-glow);
+}
+.counter-num{
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 7vw, 2.2rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.counter-label{
+  display: block;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  opacity: .85;
+  margin-top: .2rem;
+}
+
+/* FINAL --------------------------------------------------------------- */
+.final-section{
+  max-width: none;
+  background: linear-gradient(180deg, var(--white-warm), var(--blush));
+  text-align: center;
+  padding-bottom: 5rem;
+}
+.final-inner{ max-width: 420px; margin: 0 auto; position: relative; }
+.final-title{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+  color: var(--burgundy-deep);
+  margin: 0 0 1.6rem;
+}
+.final-body{
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+}
+.final-sign{
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--burgundy);
+  font-size: 1.15rem;
+  margin: 0 0 3rem;
+}
+
+/* Easter egg star — deliberately unobtrusive */
+.secret-star{
+  background: none;
+  border: none;
+  color: var(--pink-soft);
+  font-size: 1rem;
+  opacity: .55;
+  padding: .6rem;
+  margin-bottom: 1.4rem;
+  transition: color .3s ease, transform .3s ease;
+}
+.secret-star:active{ transform: scale(.85); }
+
+.secret-modal{
+  position: fixed; inset: 0;
+  background: rgba(46,37,40,.75);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.secret-card{
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem 1.8rem;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 30px 70px -20px rgba(0,0,0,.4);
+}
+.secret-line-1{
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--burgundy);
+  margin: 0 0 1rem;
+}
+.secret-line-2{
+  color: var(--text-muted);
+  font-size: .95rem;
+  margin: 0 0 1.6rem;
+}
+
+/* =====================================================================
+   Larger screens
+   ===================================================================== */
+@media (min-width: 640px){
+  .reasons-grid{ grid-template-columns: 1fr 1fr; }
+  .memories-grid{ grid-template-columns: 1fr 1fr; }
+  .section{ padding: 7rem 2rem; }
+}
+
+@media (min-width: 900px){
+  :root{ --max-width: 760px; }
+  .section-title{ font-size: 2.6rem; }
+}
+
+/* =====================================================================
+   Reduced motion
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visibility for accessibility */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------
+   IMPORTANT: elements toggled via the [hidden] attribute (lightbox,
+   secret modal) must actually disappear when hidden. Because .lightbox
+   and .secret-modal set their own `display`, that author rule beats the
+   browser's built-in `[hidden]{display:none}` rule regardless of
+   selector order — so without this override, both would stay visible
+   permanently, covering the whole page as soon as it loads.
+--------------------------------------------------------------------- */
+.lightbox[hidden],
+.secret-modal[hidden]{
+  display: none;
+}
