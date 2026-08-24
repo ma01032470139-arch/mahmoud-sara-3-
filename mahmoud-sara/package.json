@@ -1,0 +1,14 @@
+{
+  "name": "mahmoud-sara",
+  "version": "1.0.0",
+  "description": "A little private corner of the internet — made by Mahmoud for Sara.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

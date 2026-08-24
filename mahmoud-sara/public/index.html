@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mahmoud × Sara</title>
+<meta name="description" content="A little private corner of the internet, made by Mahmoud for Sara.">
+
+<!-- Fonts: Playfair Display for headings, DM Sans for body, Noto Naskh Arabic for Arabic text -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ambient floating particles layer (decorative, behind everything) -->
+<div class="ambient" id="ambient" aria-hidden="true"></div>
+
+<!-- ============================================================ -->
+<!-- OPENING SCREEN                                                -->
+<!-- ============================================================ -->
+<section id="opening" class="screen opening">
+  <div class="opening-inner reveal-up">
+    <p class="eyebrow">for Sara</p>
+    <h1 class="opening-title">Hey, Sara <span class="heart">♡</span></h1>
+    <p class="opening-sub">I made you a little place on the internet.</p>
+    <button class="btn btn-primary" id="enterBtn">Enter our little place <span class="arrow">→</span></button>
+    <p class="opening-tiny">made with a little too much care by Mahmoud</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MAIN SITE (hidden until "Enter" is pressed)                   -->
+<!-- ============================================================ -->
+<main id="site" class="site" hidden>
+
+  <!-- HERO -->
+  <section class="section hero" id="hero">
+    <div class="hero-inner reveal-on-scroll">
+      <p class="eyebrow eyebrow-center">a quiet little website</p>
+      <h1 class="hero-title">Mahmoud <span class="cross">×</span> Sara</h1>
+      <p class="hero-sub">just a little corner of the internet that belongs to us.</p>
+      <div class="scroll-hint" aria-hidden="true">
+        <span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHILDHOOD STORY -->
+  <section class="section childhood" id="childhood">
+    <div class="childhood-step reveal-on-scroll">
+      <p class="story-line">Before we became us&hellip;</p>
+    </div>
+
+    <div class="childhood-step reveal-on-scroll">
+      <p class="story-line">there was a little Sara, already smiling like she meant it&hellip;</p>
+      <div class="together-row">
+        <figure class="together-photo">
+          <img src="images/childhood-1.jpg" alt="Sara as a baby, laughing" loading="lazy">
+        </figure>
+        <div class="together-center">
+          <p class="together-text">The beginning of our story.</p>
+          <p class="together-text-sub">She always gives me positive energy and makes me happy.</p>
+        </div>
+        <figure class="together-photo">
+          <img src="images/childhood-2.jpg" alt="Sara as a young child, smiling brightly" loading="lazy">
+        </figure>
+      </div>
+    </div>
+
+    <div class="childhood-step reveal-on-scroll">
+      <p class="story-line">and somehow, years later&hellip;</p>
+      <div class="together-date-block">
+        <span class="together-date-big">21.04.2023</span>
+        <span class="together-date-caption">The day I found you was the best day. <span class="heart">❤</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section timeline-section" id="timeline">
+    <p class="eyebrow eyebrow-center">our story</p>
+    <h2 class="section-title">A little timeline</h2>
+    <div class="timeline" id="timelineList"><!-- filled by script.js --></div>
+  </section>
+
+  <!-- LETTER -->
+  <section class="section letter-section" id="letter">
+    <p class="eyebrow eyebrow-center">just for you</p>
+    <h2 class="section-title">For Sara,</h2>
+
+    <div class="envelope-wrap reveal-on-scroll">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the letter">
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-seal">❤</div>
+      </div>
+      <button class="btn btn-primary" id="openLetterBtn">Open my letter</button>
+    </div>
+
+    <div class="letter-paper" id="letterPaper" hidden>
+      <p class="letter-heading">نور عيوني ❤</p>
+      <p class="letter-body" id="letterBody" lang="ar" dir="rtl"></p>
+    </div>
+  </section>
+
+  <!-- LITTLE THINGS I LOVE ABOUT YOU -->
+  <section class="section reasons-section" id="reasons">
+    <p class="eyebrow eyebrow-center">the small stuff</p>
+    <h2 class="section-title">Little things I love about you</h2>
+    <div class="reasons-grid" id="reasonsGrid"><!-- filled by script.js --></div>
+  </section>
+
+  <!-- MAKE SARA SMILE -->
+  <section class="section smile-section" id="smile">
+    <p class="eyebrow eyebrow-center">a little game</p>
+    <h2 class="section-title">Make Sara smile</h2>
+    <button class="btn btn-primary btn-large" id="smileBtn">Make me smile ✨</button>
+    <p class="smile-message" id="smileMessage" aria-live="polite"></p>
+  </section>
+
+  <!-- MEMORIES -->
+  <section class="section memories-section" id="memories">
+    <p class="eyebrow eyebrow-center">moments</p>
+    <h2 class="section-title">Memories</h2>
+    <div class="memories-grid" id="memoriesGrid"><!-- filled by script.js --></div>
+  </section>
+
+  <!-- OUR SONG -->
+  <section class="section song-section" id="song">
+    <p class="eyebrow eyebrow-center">our song</p>
+    <h2 class="section-title" lang="ar" dir="rtl">أنت عمري</h2>
+    <p class="song-artist">Umm Kulthum</p>
+
+    <div class="player">
+      <div class="player-disc" id="playerDisc" aria-hidden="true">
+        <div class="disc-hole"></div>
+      </div>
+      <div class="player-controls">
+        <button class="player-play" id="playBtn" aria-label="Play song">
+          <svg id="iconPlay" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" width="22" height="22" hidden><path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+        </button>
+        <div class="player-track">
+          <div class="player-bar" id="playerBar" role="slider" aria-label="Song progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+            <div class="player-bar-fill" id="playerBarFill"></div>
+          </div>
+          <div class="player-times">
+            <span id="playerCurrent">0:00</span>
+            <span id="playerDuration">0:00</span>
+          </div>
+        </div>
+      </div>
+      <p class="player-hint" id="playerHint">Add <code>our-song.mp3</code> to <code>public/audio/</code> to hear it play.</p>
+      <audio id="audioEl" preload="metadata" src="audio/our-song.mp3"></audio>
+    </div>
+  </section>
+
+  <!-- RELATIONSHIP COUNTER -->
+  <section class="section counter-section" id="counter">
+    <p class="eyebrow eyebrow-center">since 28.08.2025</p>
+    <h2 class="section-title">How long have we been us?</h2>
+    <div class="counter-grid">
+      <div class="counter-cell"><span class="counter-num" id="countDays">0</span><span class="counter-label">days</span></div>
+      <div class="counter-cell"><span class="counter-num" id="countHours">0</span><span class="counter-label">hours</span></div>
+      <div class="counter-cell"><span class="counter-num" id="countMinutes">0</span><span class="counter-label">minutes</span></div>
+      <div class="counter-cell"><span class="counter-num" id="countSeconds">0</span><span class="counter-label">seconds</span></div>
+    </div>
+  </section>
+
+  <!-- FINAL SECTION -->
+  <section class="section final-section" id="final">
+    <div class="final-inner reveal-on-scroll">
+      <h2 class="final-title">Still choosing you.</h2>
+      <p class="final-body">Today.<br>Tomorrow.<br>And every ordinary day in between.</p>
+      <p class="final-sign">— Mahmoud <span class="heart">♡</span></p>
+
+      <!-- Easter egg: a quiet little star, unlabeled -->
+      <button class="secret-star" id="secretStar" aria-label="A small star">✦</button>
+
+      <button class="btn btn-ghost" id="startOverBtn">Start over ↺</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- Lightbox for memories -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close image">✕</button>
+  <img src="" alt="" id="lightboxImg">
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+</div>
+
+<!-- Easter egg reveal -->
+<div class="secret-modal" id="secretModal" hidden>
+  <div class="secret-card reveal-up">
+    <p class="secret-line-1">You found my little secret. ✨</p>
+    <p class="secret-line-2">My little secret is that making this for you was probably my favorite part.</p>
+    <button class="btn btn-primary" id="secretCloseBtn">close this ❤</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
